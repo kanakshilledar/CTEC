@@ -6,7 +6,7 @@ from pathlib import Path
 
 import serial
 
-PORT = "/dev/cu.usbmodem11101"  # Update this to the Pico serial port on your computer.
+PORT = "/dev/cu.usbmodem11201"  # Update this to the Pico serial port on your computer.
 BAUD_RATE = 115200
 SAMPLE_SECONDS = 0.5
 
@@ -70,7 +70,7 @@ with serial.Serial(PORT, BAUD_RATE, timeout=1) as ser:
             if line.startswith("OK "):
                 confirmed_setpoint = float(line.split()[1])
                 event_writer.writerow([
-                    now_utc(), "SETPOINT_CONFIRMED", confirmed_setpoint
+                    now_utc(), "SETPOINT_CONFIRMED", line
                 ])
                 event_file.flush()
                 break
